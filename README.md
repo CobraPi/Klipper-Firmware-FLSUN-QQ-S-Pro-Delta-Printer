@@ -83,6 +83,9 @@ You should see your selected web interface displayed on the page.
 
 ## Step 2 - Installing the firmware on the printer
 
+This firmware is the same for all QQ-S Pro printers. The configuration is done
+on the Raspberry Pi.
+
 ### Precompiled Version
 I've included a pre-compiled version of the printer firmware in the **precompiled_firmware** folder.
 
