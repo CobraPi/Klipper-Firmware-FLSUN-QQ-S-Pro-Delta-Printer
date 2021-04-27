@@ -1,11 +1,3 @@
-# Klipper Firmware for FLSUN QQ-S Pro
-This repository contains firmware configuration files and instructions on how to get the [Klipper](https://www.klipper3d.org/) firmware running on the FLSUN QQ-S Pro delta 3D printer.
-
-The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
-
-
-
-
 ## What is Klipper?
 
 Klipper is a 3D printer firmware that runs on a Raspberry Pi as opposed to the microcontroller of the printer.
@@ -18,6 +10,11 @@ Another advantage of Klipper is that you don't have to recompile and flash the f
 the configuration file, such as Marlin. You can even edit the configuration file on the web interface (more about this later)
 and hit a button to reset the printer and load the new configuration. This makes the tuning process much more efficient.
 
+
+# Klipper Firmware for FLSUN QQ-S Pro
+This repository contains firmware configuration files and instructions on how to get the [Klipper](https://www.klipper3d.org/) firmware running on the FLSUN QQ-S Pro delta 3D printer.
+
+The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
 ### How to Connect End Switch Style Filament Sensor
 Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer(filament_sensor).cfg file.
