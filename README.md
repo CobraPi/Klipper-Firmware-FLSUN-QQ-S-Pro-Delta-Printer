@@ -58,8 +58,6 @@ Software you will need:
 4. Moonraker API (if using Mainsail or Fluidd)
 5. Kiauh Klipper installation and update tool (this tool will allow you to install, update, and remove all the software we will need)
 
-## Step 0 - Download this repository to your computer
-
 
 ## Step 1 - Setting up the Raspberry Pi
 
