@@ -18,6 +18,7 @@ Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/har
    - Red wire -> 3.3V
    - White wire -> Z- (PA11)
    - Black wire -> Z- (GND)
+4. Use the corresponding printer.cfg file 
 
 
 
