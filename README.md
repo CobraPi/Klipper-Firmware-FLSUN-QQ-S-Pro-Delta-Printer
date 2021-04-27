@@ -10,6 +10,7 @@ Another advantage of Klipper is that you don't have to recompile and flash the f
 the configuration file, such as Marlin. You can even edit the configuration file on the web interface (more about this later)
 and hit a button to reset the printer and load the new configuration. This makes the tuning process much more efficient.
 
+### Always use this online README as a reference since the troubleshooting section is constantly updated.
 
 # Klipper Firmware for FLSUN QQ-S Pro
 This repository contains firmware configuration files and instructions on how to get the [Klipper](https://www.klipper3d.org/) firmware running on the FLSUN QQ-S Pro delta 3D printer.
@@ -201,3 +202,14 @@ Both *Mainsail* and *Fluidd* allow you to adjust the z-offset while printing if 
 
 
 Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) where you can find more info about configuring Klipper. The [config reference](https://www.klipper3d.org/Config_Reference.html) section is probably referenced the most.
+
+
+# Troubleshooting
+
+1. Why does my bed mesh look really weird?
+
+  * Either your printer is not calibrated properly or your probe is not accurate enough
+
+  * Try running `PROBE_ACCURACY` with your probe attached and if you get a value greater than 0.25 mm, your probe is not accurate enough and you have to delete your mesh profile in the web interface.
+
+  * If You get a value less than 0.25, then you need to run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html)
