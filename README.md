@@ -5,6 +5,24 @@ The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the sam
 when installing components such as the BL Touch and filament sensor, because it shows you the exact location and name of the specific pins to connect
 the sensors to.
 
+
+### How to Connect Filament Sensor
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the corresponding printer.cfg file
+
+### How to Connect BL Touch
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link
+
+1. Remove the WiFi Module
+2. Switch the jumper pin from 3.3V to 5V (located near the top right of the WiFi module)
+3. Connect:
+   - Orange wire -> IO0-PA8
+   - Brown wire -> GND
+   - Red wire -> 3.3V
+   - White wire -> Z- (PA11)
+   - Black wire -> Z- (GND) 
+
+
+
 ## What is Klipper?
 
 Klipper is a 3D printer firmware that runs on the Raspberry Pi as opposed to on the microcontroller of the printer.
@@ -17,12 +35,19 @@ Another advantage of Klipper is that you don't have to recompile and flash the f
 the configuration file, such as Marlin. You can even edit the configuration file on the web interface (more about this later)
 and hit a button to reset the printer and load the new configuration. This makes tuning much more efficient.
 
+There are 3 different types of configurations for the QQ-S Pro in the *configurations* folder:
+
+1. QQ-S Pro Stock
+2. QQ-S With Filament Sensor
+3. QQ-S With BL Touch
+4. QQ-S Pro With BL Touch and Filament Sensor
+
 Hardware you will need:
 
 1. Raspberry Pi w/ SD Card
-1.1 (optional) Webcam
-2. QQ-S Pro Delta Printer
-3. Computer (PC,Mac,Linux)
+2. (optional) Webcam
+3. QQ-S Pro Delta Printer
+4. Computer (PC, Mac, Linux)
 
 Software you will need:
 
@@ -33,6 +58,7 @@ Software you will need:
 5. Kiauh Klipper installation and update tool (this tool will allow you to install, update, and remove all the software we will need)
 
 ## Step 0 - Download this repository to your computer
+
 
 ## Step 1 - Setting up the Raspberry Pi
 
@@ -69,13 +95,13 @@ If you'd rather compile it yourself or my precompiled version is not working for
 1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
-       -Enable extra low-level configuration options
-             *Micro-controller Architecture (STMicroelectronics STM32)
-             *Processor model (STM32F103)
-             *Bootloader offset (28KiB bootloader)
-             *Clock Reference (8 MHz crystal)
-             *Communication interface (Serial (on USART3 PB11/PB10))
-       -(250000) Baud rate for serial port
+       - Enable extra low-level configuration options
+             - Micro-controller Architecture (STMicroelectronics STM32)
+             - Processor model (STM32F103)
+             - Bootloader offset (28KiB bootloader)
+             - Clock Reference (8 MHz crystal)
+             - Communication interface (Serial (on USART3 PB11/PB10))
+       - (250000) Baud rate for serial port
 4. Press 'q' to quit and 'y' to save your settings
 5. Type `make` to compile the firmware
 6. Next, navigate to the *scripts* folder: `cd scripts`
@@ -108,6 +134,22 @@ If you'd rather compile it yourself or my precompiled version is not working for
 ## Step 4 - Calibrating the printer
 
 1. The first thing we need to do is connect the z-probe to the effector (the autolevel switch). Skip this step if using a BL Touch
-2. Then open up the console and type `DELTA_CALIBRATE` and let the printer do its thing.
+2. Then open up the console and type `DELTA_CALIBRATE`. Once this is done type: `SAVE_CONFIG` to save the settings.
+       - This will get a decent calibration for your printer, good enough to print well. However if you really want to optimize the calibration
+         for your specific printer, run the [Enhanced Calibration](https://www.klipper3d.org/Delta_Calibrate.html) which requires you to print an
+         object, measure it, and input the values in the console.
 3. When this is finished, we need to calculate the Z-offset by typing: `PROBE_CALIBRATE`
-       *Once
+       - After the probe stops, do the [paper test](https://www.klipper3d.org/Bed_Level.html#the-paper-test)
+       - Type: `TESTZ Z=-<value>` where '<value>' is the amount by which to decrease the Z-height (usuall 0.05 or 0.01 if close to the bed) so that    
+         there is just a little friction between the nozzle and paper.
+       - When you are satisfied with the Z-height, type `ACCEPT` and then `SAVE_CONFIG`
+4. Bed mesh leveling is enabled in all my config files, so after setting the Z-offset, type `BED_MESH_CALIBRATE` in the console then `SAVE_CONFIG`
+   when finished.
+       - If using an offset probe (like a BL Touch) you might get an error 'move out of range' because the probe offset causes the print head to
+         move outside the range of the print bed. If this happens, try decreasing the 'mesh_radius' or offsetting the 'mesh_origin'
+5. Tune the heater PID settings so that you don't over shoot your desired temperature: `PID_CALIBRATE HEATER=extruder TARGET=<temperature>` where
+   <temperature> is the desired temperature to use for tuning.
+
+## Step 5 - Print!
+
+Pretty self explanatory. Load the g-code and go!
