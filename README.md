@@ -69,13 +69,13 @@ If you'd rather compile it yourself or my precompiled version is not working for
 1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
-       - Enable extra low-level configuration options
-             * Micro-controller Architecture (STMicroelectronics STM32)
-             * Processor model (STM32F103)
-             * Bootloader offset (28KiB bootloader)
-             * Clock Reference (8 MHz crystal)
-             * Communication interface (Serial (on USART3 PB11/PB10))
-       - (250000) Baud rate for serial port
+       -Enable extra low-level configuration options
+             *Micro-controller Architecture (STMicroelectronics STM32)
+             *Processor model (STM32F103)
+             *Bootloader offset (28KiB bootloader)
+             *Clock Reference (8 MHz crystal)
+             *Communication interface (Serial (on USART3 PB11/PB10))
+       -(250000) Baud rate for serial port
 4. Press 'q' to quit and 'y' to save your settings
 5. Type `make` to compile the firmware
 6. Next, navigate to the *scripts* folder: `cd scripts`
@@ -96,8 +96,18 @@ If you'd rather compile it yourself or my precompiled version is not working for
 5. Open up your printer.cfg file on your web interface:
    - Mainsail: in the *settings/machine* tab on the bottom left
    - Fluidd: in the *printer* tab on the top right
-6. Once in the printer.cfg file:
+6. Once in the printer.cfg file, delete everything and copy contents of the desired config from the *configuration* folder of this repository
+7. Set your printers serial port:
        * find the `[mcu]` section
-       * add the path from step 4 after the `serial:` configuration ex.
-         ex. `[mcu]
-              serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0`
+       * delete the path after `serial: ` and replace it with your result from step 4
+8. Press the 'Save & Restart' button, if successful you should hear the printer beep and take a couple seconds to connect.
+       * if your printer is not connecting, try pressing the 'firmware restart' button or typing `FIRMWARE_RESTART` in the console
+9. Test the connection by homing your printer or `G28` in the console.
+
+
+## Step 4 - Calibrating the printer
+
+1. The first thing we need to do is connect the z-probe to the effector (the autolevel switch). Skip this step if using a BL Touch
+2. Then open up the console and type `DELTA_CALIBRATE` and let the printer do its thing.
+3. When this is finished, we need to calculate the Z-offset by typing: `PROBE_CALIBRATE`
+       *Once
