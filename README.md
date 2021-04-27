@@ -18,13 +18,13 @@ Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/har
    - Red wire -> 3.3V
    - White wire -> Z- (PA11)
    - Black wire -> Z- (GND)
-4. Use the corresponding printer.cfg file 
+4. Use the corresponding printer.cfg file
 
 
 
 ## What is Klipper?
 
-Klipper is a 3D printer firmware that runs on the Raspberry Pi as opposed to on the microcontroller of the printer.
+Klipper is a 3D printer firmware that runs on a Raspberry Pi as opposed to on the microcontroller of the printer.
 The advantage of this is that the complex inverse kinematic calculations of delta printers can be processed on the
 Raspberry Pi, which has way more computational horsepower compared to the 32-bit microcontroller in the printer.
 This way, all the microcontroller has to handle are the movement (ex. move stepper_a 10 steps) as well as heating commands
@@ -32,13 +32,13 @@ This way, all the microcontroller has to handle are the movement (ex. move stepp
 
 Another advantage of Klipper is that you don't have to recompile and flash the firmware every time you change something in
 the configuration file, such as Marlin. You can even edit the configuration file on the web interface (more about this later)
-and hit a button to reset the printer and load the new configuration. This makes tuning much more efficient.
+and hit a button to reset the printer and load the new configuration. This makes the tuning process much more efficient.
 
-There are 3 different types of configurations for the QQ-S Pro in the *configurations* folder:
+There are 4 different types of configurations for the QQ-S Pro in the *configurations* folder:
 
 1. QQ-S Pro Stock
-2. QQ-S With Filament Sensor
-3. QQ-S With BL Touch
+2. QQ-S Pro With Filament Sensor
+3. QQ-S Pro With BL Touch
 4. QQ-S Pro With BL Touch and Filament Sensor
 
 Hardware you will need:
@@ -67,13 +67,13 @@ over Klipper. Both Mainsail and Fluidd were developed for Klipper (Fluidd is a f
 hellbent on using OctoPrint, stop after **Step 6** below:
 
 1. Download [OctoPi](https://octoprint.org/download/) and set it up on the Raspberry Pi according to the instructions on the download page.
-2. Once the Raspberry Pi is configured, ssh into it from your computer.
+2. Once the Raspberry Pi is configured, ssh into it from your computer: `ssh pi@octopi.local`
 3. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
 4. Navigate to the Kiauh directory: `cd kiauh`
 5. Run Kiauh: `./kiauh.sh`
 6. Install Klipper Firmware
 7. Install the Moonraker API
-8. Install **either** the Mainsail or Fluidd web interface
+8. Install either the Mainsail **or** Fluidd web interface
 9. (optional) Install 'MJPG Streamer' if using a webcam
 10. Reboot the Raspberry Pi `sudo reboot`
 11. Once the Pi reboots, Navigate to your selected hostname (default is 'http://octopi.local') in your browser. *I will assume you're using the     default hostname for the duration of this guide.*
@@ -124,20 +124,22 @@ If you'd rather compile it yourself or my precompiled version is not working for
 6. Once in the printer.cfg file, delete everything and copy contents of the desired config from the *configuration* folder of this repository
 7. Set your printers serial port:
        * find the `[mcu]` section
-       * delete the path after `serial: ` and replace it with your result from step 4
+       * delete the path after `serial:` and replace it with your result from step 4
+
 8. Press the 'Save & Restart' button, if successful you should hear the printer beep and take a couple seconds to connect.
        * if your printer is not connecting, try pressing the 'firmware restart' button or typing `FIRMWARE_RESTART` in the console
-9. Test the connection by homing your printer or `G28` in the console.
+9. Test the connection by homing your printer or typing `G28` in the console.
 
 
 ## Step 4 - Calibrating the printer
 
 1. The first thing we need to do is connect the z-probe to the effector (the autolevel switch). Skip this step if using a BL Touch
 2. Then open up the console and type `DELTA_CALIBRATE`. Once this is done type: `SAVE_CONFIG` to save the settings.
-       - This will get a decent calibration for your printer, good enough to print well. However if you really want to optimize the calibration
+
+        This will get a decent calibration for your printer, good enough to print well. However if you really want to optimize the calibration
          for your specific printer, run the [Enhanced Calibration](https://www.klipper3d.org/Delta_Calibrate.html) which requires you to print an
          object, measure it, and input the values in the console.
-3. When this is finished, we need to calculate the Z-offset by typing: `PROBE_CALIBRATE`
+3. When the delta calibration is finished, we need to calculate the Z-offset by typing: `PROBE_CALIBRATE`
        - After the probe stops, do the [paper test](https://www.klipper3d.org/Bed_Level.html#the-paper-test)
        - Type: `TESTZ Z=-<value>` where '<value>' is the amount by which to decrease the Z-height (usuall 0.05 or 0.01 if close to the bed) so that    
          there is just a little friction between the nozzle and paper.
