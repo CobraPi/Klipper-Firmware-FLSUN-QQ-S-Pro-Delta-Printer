@@ -147,7 +147,7 @@ If you'd rather compile it yourself or my precompiled version is not working for
   - delete the path after `serial:` and paste your output from step 4
 
 
-8. Press the 'Save & Restart' button, if successful you should hear the printer beep and take a couple seconds to connect.
+8. Press the 'Save & Restart' button, if successful you should hear the printer beep and take a couple seconds to connect
 
   - if your printer is not connecting, try pressing the 'firmware restart' button or typing `FIRMWARE_RESTART` in the console
 
