@@ -4,22 +4,6 @@ This repository contains firmware configuration files and instructions on how to
 The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
 
-### How to Connect End Switch Style Filament Sensor
-Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the corresponding printer.cfg file.
-
-### How to Connect BL Touch
-Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link.
-
-1. Remove the WiFi Module
-2. Switch the jumper pin from 3.3V to 5V (located near the top right of the WiFi module - from perspective of picture)
-3. Connect:
-   - Orange wire -> IO0-PA8
-   - Brown wire -> GND
-   - Red wire -> 3.3V
-   - White wire -> Z- (PA11)
-   - Black wire -> Z- (GND)
-4. Use the corresponding printer.cfg file
-
 
 
 ## What is Klipper?
@@ -33,6 +17,27 @@ This way, all the microcontroller has to handle are the movement (ex. move stepp
 Another advantage of Klipper is that you don't have to recompile and flash the firmware every time you change something in
 the configuration file, such as Marlin. You can even edit the configuration file on the web interface (more about this later)
 and hit a button to reset the printer and load the new configuration. This makes the tuning process much more efficient.
+
+
+### How to Connect End Switch Style Filament Sensor
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer(filament_sensor).cfg file.
+
+### How to Connect BL Touch
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link.
+
+1. Remove the WiFi Module
+2. Switch the jumper pin from 3.3V to 5V (located near the top right of the WiFi module - from perspective of picture)
+3. Connect:
+   - Orange wire -> IO0-PA8
+   - Brown wire -> GND
+   - Red wire -> 3.3V
+   - White wire -> Z- (PA11)
+   - Black wire -> Z- (GND)
+4. Use the corresponding printer(BL_touch).cfg file
+
+
+### How to Install the Klipper Ecosystem
+
 
 There are 4 different types of configurations for the QQ-S Pro in the *configurations* folder:
 
