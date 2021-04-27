@@ -97,13 +97,13 @@ If you'd rather compile it yourself or my precompiled version is not working for
 1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
-       - Enable extra low-level configuration options
-             - Micro-controller Architecture (STMicroelectronics STM32)
-             - Processor model (STM32F103)
-             - Bootloader offset (28KiB bootloader)
-             - Clock Reference (8 MHz crystal)
-             - Communication interface (Serial (on USART3 PB11/PB10))
-       - (250000) Baud rate for serial port
+        * Enable extra low-level configuration options
+             * Micro-controller Architecture (STMicroelectronics STM32)
+             * Processor model (STM32F103)
+             * Bootloader offset (28KiB bootloader)
+             * Clock Reference (8 MHz crystal)
+             * Communication interface (Serial (on USART3 PB11/PB10))
+       * (250000) Baud rate for serial port
 4. Press 'q' to quit and 'y' to save your settings
 5. Type `make` to compile the firmware
 6. Next, navigate to the *scripts* folder: `cd scripts`
