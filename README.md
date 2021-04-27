@@ -213,3 +213,8 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
   * Try running `PROBE_ACCURACY` with your probe attached and if you get a value greater than 0.25 mm, your probe is not accurate enough and you have to delete your mesh profile in the web interface.
 
   * If You get a value less than 0.25, then you need to run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html)
+
+
+2. Why is my extruder temperature reading way off?
+
+  * The wrong temperature sensor is probably set in the [extruder] section of the config file. The stock thermistor is `sensor_type: EPCOS 100K B57560G104`. Check out [the documentation](https://www.klipper3d.org/Config_Reference.html#temperature-sensors) for all supported temperature sensors.
