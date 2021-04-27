@@ -97,18 +97,23 @@ If you'd rather compile it yourself or my precompiled version is not working for
 1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
-        * Enable extra low-level configuration options
-             * Micro-controller Architecture (STMicroelectronics STM32)
-             * Processor model (STM32F103)
-             * Bootloader offset (28KiB bootloader)
-             * Clock Reference (8 MHz crystal)
-             * Communication interface (Serial (on USART3 PB11/PB10))
-       * (250000) Baud rate for serial port
+- Enable extra low-level configuration options
+  - Micro-controller Architecture (STMicroelectronics STM32)
+  - Processor model (STM32F103)
+  - Bootloader offset (28KiB bootloader)
+  - Clock Reference (8 MHz crystal)
+  - Communication interface (Serial (on USART3 PB11/PB10))
+- (250000) Baud rate for serial port
+
 4. Press 'q' to quit and 'y' to save your settings
+
 5. Type `make` to compile the firmware
+
 6. Next, navigate to the *scripts* folder: `cd scripts`
+
 7. Run: `./update_mks_robin.py ../out/klipper.bin ../out/robin_mini.bin` (this will rename the firmware file from 'klipper.bin' to 'robin_mini.bin'
    and save it to the *out* directory)
+
 8. Navigate to the *out* directory and verify that the file 'robin_mini.bin' exists: `cd ../out` then `ls`
 9. Disconnect from your Pi: `exit`
 10. Download the 'robin_mini.bin' file from the Raspberry Pi to your computer using sftp: `sftp pi@octopi.local` then `cd klipper/out` then `get robin_mini.bin` (this will download 'robin_mini.bin' to whichever directory you've issued the sftp command from)
@@ -118,39 +123,53 @@ If you'd rather compile it yourself or my precompiled version is not working for
 ## Step 3 -  Connecting the printer to the Raspberry Pi
 
 1. Open your web interface 'octopi.local'
+
 2. Plug in the printer to one of your Raspberry Pi's USB ports
+
 3. ssh into your Raspberry Pi: `ssh pi@octopi.local`
+
 4. Find out which serial port your printer is connected to: `ls /dev/serial/by-id/*` and take note of it
+
 5. Open up your printer.cfg file on your web interface:
-   - Mainsail: in the *settings/machine* tab on the bottom left
-   - Fluidd: in the *printer* tab on the top right
+  - Mainsail: in the *settings/machine* tab on the bottom left
+  - Fluidd: in the *printer* tab on the top right
+
 6. Once in the printer.cfg file, delete everything and copy contents of the desired config from the *configuration* folder of this repository
+
 7. Set your printers serial port:
-       * find the `[mcu]` section
-       * delete the path after `serial:` and replace it with your result from step 4
+  - find the `[mcu]` section
+  - delete the path after `serial:` and replace it with your result from step 4
+
 
 8. Press the 'Save & Restart' button, if successful you should hear the printer beep and take a couple seconds to connect.
-       * if your printer is not connecting, try pressing the 'firmware restart' button or typing `FIRMWARE_RESTART` in the console
+  - if your printer is not connecting, try pressing the 'firmware restart' button or typing `FIRMWARE_RESTART` in the console
+
+
 9. Test the connection by homing your printer or typing `G28` in the console.
 
 
 ## Step 4 - Calibrating the printer
 
 1. The first thing we need to do is connect the z-probe to the effector (the autolevel switch). Skip this step if using a BL Touch
+
 2. Then open up the console and type `DELTA_CALIBRATE`. Once this is done type: `SAVE_CONFIG` to save the settings.
 
-        This will get a decent calibration for your printer, good enough to print well. However if you really want to optimize the calibration
-         for your specific printer, run the [Enhanced Calibration](https://www.klipper3d.org/Delta_Calibrate.html) which requires you to print an
-         object, measure it, and input the values in the console.
+  This will get a decent calibration for your printer, good enough to print well. However if you really want to optimize the calibration
+  for your specific printer, run the [Enhanced Calibration](https://www.klipper3d.org/Delta_Calibrate.html) which requires you to print an
+  object, measure it, and input the values in the console.
+
 3. When the delta calibration is finished, we need to calculate the Z-offset by typing: `PROBE_CALIBRATE`
-       - After the probe stops, do the [paper test](https://www.klipper3d.org/Bed_Level.html#the-paper-test)
-       - Type: `TESTZ Z=-<value>` where '<value>' is the amount by which to decrease the Z-height (usuall 0.05 or 0.01 if close to the bed) so that    
-         there is just a little friction between the nozzle and paper.
-       - When you are satisfied with the Z-height, type `ACCEPT` and then `SAVE_CONFIG`
+  - After the probe stops, do the [paper test](https://www.klipper3d.org/Bed_Level.html#the-paper-test)
+  - Type: `TESTZ Z=-<value>` where '<value>' is the amount by which to decrease the Z-height (usually 0.05 or 0.01 if close to the bed) so that there is just a little friction between the nozzle and paper.
+  - When you are satisfied with the Z-height, type `ACCEPT` and then `SAVE_CONFIG`
+
+
 4. Bed mesh leveling is enabled in all my config files, so after setting the Z-offset, type `BED_MESH_CALIBRATE` in the console then `SAVE_CONFIG`
    when finished.
-       - If using an offset probe (like a BL Touch) you might get an error 'move out of range' because the probe offset causes the print head to
-         move outside the range of the print bed. If this happens, try decreasing the 'mesh_radius' or offsetting the 'mesh_origin'
+
+   - If using an offset probe (like a BL Touch) you might get an error 'move out of range' because the probe offset causes the print head to move outside the range of the print bed. If this happens, try decreasing the 'mesh_radius' or offsetting the 'mesh_origin'
+
+
 5. Tune the heater PID settings so that you don't over shoot your desired temperature: `PID_CALIBRATE HEATER=extruder TARGET=<temperature>` where
    <temperature> is the desired temperature to use for tuning.
 
