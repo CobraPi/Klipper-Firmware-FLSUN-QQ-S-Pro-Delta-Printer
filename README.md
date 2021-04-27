@@ -1,9 +1,7 @@
 # Klipper Firmware for FLSUN QQ-S Pro
 This repository contains firmware configuration files and instructions on how to get the [Klipper](https://www.klipper3d.org/) firmware running on the FLSUN QQ-S Pro delta 3D printer
 
-The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf). This picture will come in handy
-when installing components such as the BL Touch and filament sensor, because it shows you the exact location and name of the specific pins to connect
-the sensors to.
+The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
 
 ### How to Connect Filament Sensor
@@ -19,7 +17,7 @@ Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/har
    - Brown wire -> GND
    - Red wire -> 3.3V
    - White wire -> Z- (PA11)
-   - Black wire -> Z- (GND) 
+   - Black wire -> Z- (GND)
 
 
 
