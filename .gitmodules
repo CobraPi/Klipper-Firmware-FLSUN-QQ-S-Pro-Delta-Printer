@@ -1,0 +1,3 @@
+[submodule "uncompiled_firmware/klipper"]
+	path = uncompiled_firmware/klipper
+	url = https://github.com/KevinOConnor/klipper.git
