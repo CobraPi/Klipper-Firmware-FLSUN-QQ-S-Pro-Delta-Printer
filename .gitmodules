@@ -1,3 +1,6 @@
 [submodule "uncompiled_firmware/klipper"]
 	path = uncompiled_firmware/klipper
 	url = https://github.com/KevinOConnor/klipper.git
+[submodule "raspberry_pi_tools/kiauh"]
+	path = raspberry_pi_tools/kiauh
+	url = https://github.com/th33xitus/kiauh.git
