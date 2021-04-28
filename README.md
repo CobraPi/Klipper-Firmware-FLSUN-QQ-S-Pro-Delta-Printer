@@ -111,8 +111,7 @@ If you'd rather compile it yourself or my precompiled version is not working for
 6. Next, navigate to the *scripts* folder: `cd scripts`
 7. Run: `./update_mks_robin.py ../out/klipper.bin ../out/robin_mini.bin`
 
- - this will rename the firmware file from 'klipper.bin' to 'robin_mini.bin'
-   and save it to the *out* directory)
+ - this will rename the firmware file from 'klipper.bin' to 'robin_mini.bin' and save it to the *out* directory
 
 
 8. Navigate to the *out* directory and verify that the file 'robin_mini.bin' exists: `cd ../out` then `ls`
