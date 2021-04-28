@@ -16,7 +16,7 @@ This repository contains firmware configuration files and instructions on how to
 
 The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
-## How to Connect an End Switch Style Filament Sensor
+## How to Connect an End-stop Switch Style Filament Sensor
 Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer(filament_sensor).cfg file.
 
 ## How to Connect a BL Touch
