@@ -62,21 +62,22 @@ Software you will need:
 ## Step 1 - Setting up the Raspberry Pi
 
 The heart of Klipper is the Raspberry Pi, which will be running both the firmware and the web interface through which we control the printer.
-These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint doesn't have nearly as much control
-over Klipper. Both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar) However, if you are
-hellbent on using OctoPrint, stop after **Step 6** below and skip ahead to **Step 9**:
+These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion. However, if you are
+hellbent on using OctoPrint or need to use its massive plugin library, skip **Step 7** below, follow **Step 8** and skip ahead to **Step 11**:
 
 1. Download the [OctoPi](https://octoprint.org/download/) operating system and set it up on the Raspberry Pi according to the instructions on the download page.
-2. Once the Raspberry Pi is configured, ssh into it from your computer: `ssh pi@octopi.local`
-3. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
-4. Navigate to the Kiauh directory: `cd kiauh`
-5. Run Kiauh: `./kiauh.sh`
-6. Install Klipper Firmware
-7. Install the Moonraker API
-8. Install either the Mainsail **or** Fluidd web interface
-9. (optional) Install 'MJPG Streamer' if using a webcam
-10. Reboot the Raspberry Pi `sudo reboot`
-11. Once the Pi reboots, Navigate to your selected hostname (default is 'http://octopi.local') in your browser. *I will assume you're using the     default hostname for the duration of this guide.*
+2. Once the Raspberry Pi is configured, open up `https://octopi.local` on your browser to see if the web server is set up. You should see the OctoPrint UI if successful.
+3. ssh into it from your computer: `ssh pi@octopi.local`
+4. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
+5. Navigate to the Kiauh directory: `cd kiauh`
+6. Run Kiauh: `./kiauh.sh`
+7. Remove OctoPrint
+8. Install Klipper Firmware
+9. Install the Moonraker API
+10. Install either the Mainsail **or** Fluidd web interface
+11. (optional) Install 'MJPG Streamer' if using a webcam
+12. Reboot the Raspberry Pi `sudo reboot`
+13. Once the Pi reboots, Navigate to your selected hostname (default is 'http://octopi.local') in your browser. *I will assume you're using the     default hostname for the duration of this guide.*
 
 You should see your selected web interface displayed on the page.
 
