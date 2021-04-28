@@ -9,7 +9,7 @@ Another advantage of Klipper is that you don't have to recompile and flash the f
 the configuration file, such as Marlin. You can even edit the configuration file on the web interface (more about this later)
 and hit a button to reset the printer and load the new configuration. This makes the tuning process much more efficient.
 
-### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently
+### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently.
 
 # Klipper Firmware for FLSUN QQ-S Pro
 This repository contains firmware configuration files and instructions on how to get the [Klipper](https://www.klipper3d.org/) firmware running on the FLSUN QQ-S Pro delta 3D printer.
