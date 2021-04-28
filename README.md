@@ -226,3 +226,12 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 2. Why is my extruder temperature reading way off?
 
     * The wrong temperature sensor is probably set in the [extruder] section of the config file. The stock thermistor of the QQ-S Pro is `sensor_type: EPCOS 100K B57560G104`. Check out [the documentation](https://www.klipper3d.org/Config_Reference.html#temperature-sensors) for all supported temperature sensors.
+
+
+3. Why is my probe not working?
+
+    * This was my mistake! I forgot to invert the logic of the probe pin. To fix it you can either:
+
+        * Navigate to the `[probe]` section of the config file and change `pin: PA11` to `pin: !PA11`
+
+        * Do a `git pull` of this repository and replace your old config files with the updated ones
