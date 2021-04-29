@@ -89,6 +89,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 6. Navigate to the Kiauh directory: `cd kiauh`
 7. Run Kiauh: `./kiauh.sh`
 8. Install Klipper Firmware
+  - set Klipper to use the default config directory: press `Enter` then `y`
   - create only 1 instance of Klipper because we're not going to be running multiple printers
 9. Install the Moonraker API
   - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
