@@ -12,7 +12,7 @@ It's also highly configurable. Here are some of the cool things you can do with 
 
 - You can set it up to run multiple boards on a single printer (if you have a ton of steppers and/or extruders)
 - You can run multiple printers from one Raspberry Pi and control them all from a single web interface
-- You can set up a printer farm by running a ton of printers on a powerful Linux PC 
+- You can set up a printer farm by running a ton of printers on a powerful Linux PC
 
 ### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently.
 
@@ -71,7 +71,7 @@ Software you will need:
 3. Klipper client for Raspberry Pi
 4. Web interface (OctoPrint, Mainsail, Fluidd)
 5. Moonraker API (if using Mainsail or Fluidd)
-6. Kiauh Klipper installation and update tool (this tool will allow you to install, update, and remove all the software you will need)
+6. Kiauh (Klipper Insallation and Update Helper) - will be used to install all the required software on the Raspberry Pi
 
 
 ## Step 1 - Setting up the Raspberry Pi
@@ -84,7 +84,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 1. Download the [OctoPi](https://octoprint.org/download/) operating system and set it up on the Raspberry Pi according to the instructions on the download page.
 2. Once the Raspberry Pi is configured, open up `https://octopi.local` on your browser to see if the web server is set up. You should see the OctoPrint UI if successful.
 3. ssh into it from your computer: `ssh pi@octopi.local`
-4. Delete all the folders in the root directory `sudo rm -r *` - this is so that OctoPrint doesn't interfere with our web-interface installation. You can always install it again with Kiauh
+4. Delete all the folders in the root directory `sudo rm -r *` - this is so that OctoPrint doesn't interfere with our web interface installation. You can always install it again with Kiauh
 5. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
 6. Navigate to the Kiauh directory: `cd kiauh`
 7. Run Kiauh: `./kiauh.sh`
@@ -93,11 +93,17 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 9. Install the Moonraker API
   - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
 10. Install either the Mainsail **or** Fluidd web interface
+  - If using a Webcam, press `y` if it asks you if you want to install 'MJPG-Streamer' (You can also install this package from Kiauh)
   - Note that after you install both Klipper and the Moonraker API, you can use Kiauh to switch between the two web interfaces to try them out. Just remove one and install the other (you don't need to re-install Klipper or Moonraker)
-11. (optional) Install 'MJPG Streamer' if using a webcam - you might have already installed it during the Mainsail/Fluidd installation though. Kiauh will indicate whether or not it is installed.
+11. Edit visudo to allow either Mainsail or Fluidd to update the system:
+  - Enter: `sudo visudo` in the Raspberry Pi terminal
+  - Then copy and paste this line to the end of the file: `pi ALL=(ALL) NOPASSWD: ALL` (if you change your username, you will have to replace 'pi' with your new username)
+  - Press `Control + X` to exit, then `y` when it asks you if you want to save your changes
 12. Navigate to the default hostname 'http://octopi.local' in your browser. *I will assume you're using the default hostname for the duration of this guide.*
 
 #### You should see your selected web interface displayed on the page.
+
+If you see either the Mainsail or Fluidd interface, you can end your ssh session with the Pi by typing `exit`
 
 
 ## Step 2 - Installing the firmware on the printer
@@ -106,14 +112,14 @@ This firmware is the same for all QQ-S Pro printers. The configuration is done
 on the Raspberry Pi.
 
 ### Precompiled Version
-I've included a pre-compiled version of the printer firmware in the *precompiled_firmware* folder.
+I've included a pre-compiled version of the printer firmware in the *precompiled_firmware* folder that should work for all QQ-S Pro printers.
 
 1. Drag this file into the root directory of the SD card of your printer, insert it, and power it on. It is the same process as flashing Marlin or any other firmware on the QQ-S Pro.
 
 ### Uncompiled Version
 If you'd rather compile it yourself or my precompiled version is not working for some reason, this is what you need to do:
 
-1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
+1. ssh into your Raspberry Pi: `ssh pi@octopi.local` if you've logged out since the last step.
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
 - Enable extra low-level configuration options
