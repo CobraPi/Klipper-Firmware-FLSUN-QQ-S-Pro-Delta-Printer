@@ -6,8 +6,7 @@ Raspberry Pi, which has way more computational horsepower compared to the 32-bit
 This way, all the microcontroller has to handle are the movement commands (ex. move stepper_a 10 steps) as well as heating commands (ex. heat extruder to 200 degrees). This results in a much smoother operation of the printer.
 
 Another advantage of Klipper is that you don't have to recompile and flash the firmware every time you change something in
-the configuration file, such as Marlin. You can even edit the configuration file on the web interface (more about this later)
-and hit a button to reset the printer and load the new configuration. This makes the tuning process much more efficient.
+the configuration file, such as Marlin. You can even edit the configuration file on the web interface and hit a button to reset the printer and instantly load the new configuration. This makes the tuning process much more efficient.
 
 ### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently.
 
