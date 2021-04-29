@@ -52,6 +52,7 @@ Hardware you will need:
 
 Software you will need:
 
+1. Raspbian lite OS
 1. Klipper firmware for printer (.bin file)
 2. Klipper client for Raspberry Pi
 3. Web interface (OctoPrint, Mainsail, Fluidd)
@@ -62,22 +63,23 @@ Software you will need:
 ## Step 1 - Setting up the Raspberry Pi
 
 The heart of Klipper is the Raspberry Pi, which will be running both the firmware and the web interface through which we control the printer.
-These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion. However, if you are
-hellbent on using OctoPrint or need to use its massive plugin library, skip **Step 7** below, follow **Step 8** and skip ahead to **Step 11**:
+These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion. However, if you are hellbent on using OctoPrint or need to use its massive plugin library, follow **Step 1** then skip ahead to **Step 12**. You will need to download the OctoKlipper plugin to get it working but I'm not going to cover the OctoPrint setup since it's already covered in the original Klipper [installation page](https://www.klipper3d.org/Installation.html):
 
 1. Download the [OctoPi](https://octoprint.org/download/) operating system and set it up on the Raspberry Pi according to the instructions on the download page.
 2. Once the Raspberry Pi is configured, open up `https://octopi.local` on your browser to see if the web server is set up. You should see the OctoPrint UI if successful.
 3. ssh into it from your computer: `ssh pi@octopi.local`
-4. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
-5. Navigate to the Kiauh directory: `cd kiauh`
-6. Run Kiauh: `./kiauh.sh`
-7. Remove OctoPrint
+4. Delete all the folders in the root directory `sudo rm -r *` - this is so that OctoPrint doesn't interfere with our web-interface installation. You can always install it again with Kiauh
+5. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
+6. Navigate to the Kiauh directory: `cd kiauh`
+7. Run Kiauh: `./kiauh.sh`
 8. Install Klipper Firmware
+  - create only 1 instance of Klipper because we're not going to be running multiple printers
 9. Install the Moonraker API
+  - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
 10. Install either the Mainsail **or** Fluidd web interface
 11. (optional) Install 'MJPG Streamer' if using a webcam
 12. Reboot the Raspberry Pi `sudo reboot`
-13. Once the Pi reboots, Navigate to your selected hostname (default is 'http://octopi.local') in your browser. *I will assume you're using the     default hostname for the duration of this guide.*
+13. Once the Pi reboots, Navigate to your selected hostname (default is 'http://octopi.local') in your browser. *I will assume you're using the default hostname for the duration of this guide.*
 
 You should see your selected web interface displayed on the page.
 
