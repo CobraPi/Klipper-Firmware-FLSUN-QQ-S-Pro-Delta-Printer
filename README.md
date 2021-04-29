@@ -286,3 +286,16 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 4. Why is my printer timing out when I home it?
 
       * It's probably caused by the `[idle_timeout]` and `timeout: 360` lines in the config. Try commenting them out. I've made this change in the config files as well  
+
+
+5. Why is my printer going backwards when I home it?
+
+      * This is strange. I don't know exactly what's going on but it can be fixed by adding a `!` in front of each `dir_pin` in the `[stepper]` section.
+
+      * For example:
+      ```
+      [stepper_a]
+      dir_pin: !PE2
+      ```
+
+      * Do this for all 3 steppers.
