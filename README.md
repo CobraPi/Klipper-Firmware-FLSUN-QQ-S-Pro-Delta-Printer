@@ -92,6 +92,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
   - set Klipper to use the default config directory: press `Enter` then `y`
   - create only 1 instance of Klipper because we're not going to be running multiple printers
 9. Install the the Klipper API - Moonraker
+  - if the prompt asks you if you want to disable OctoPrint, press `y`
   - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
 10. Install either the Mainsail **or** Fluidd web interface
   - If using a Webcam, press `y` if it asks you if you want to install 'MJPG-Streamer' (You can also install this package from Kiauh)
