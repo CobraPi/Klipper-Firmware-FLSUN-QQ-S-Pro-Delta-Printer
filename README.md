@@ -119,7 +119,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 8. (optional) Remove Mainsail
 9. (optional) Install fluidd - no need to install macros since the preconfigured files already have them
 10. (optional) Quit Kiauh   
-6. Exit your ssh session: `exit`
+11. Exit your ssh session: `exit`
 
 
 #### Refresh the web-page if you installed fluidd and you should see the new interface
