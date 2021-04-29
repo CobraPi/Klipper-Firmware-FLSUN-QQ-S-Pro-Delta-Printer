@@ -70,7 +70,7 @@ Software you will need:
 2. Klipper firmware for printer (.bin file)
 3. Klipper client for Raspberry Pi
 4. Web interface (OctoPrint, Mainsail, Fluidd)
-5. Moonraker API (if using Mainsail or Fluidd)
+5. Klipper API - Moonraker (if using Mainsail or Fluidd)
 6. Kiauh (Klipper Insallation and Update Helper) - will be used to install all the required software on the Raspberry Pi
 
 
@@ -91,7 +91,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 8. Install Klipper Firmware
   - set Klipper to use the default config directory: press `Enter` then `y`
   - create only 1 instance of Klipper because we're not going to be running multiple printers
-9. Install the Moonraker API
+9. Install the the Klipper API - Moonraker
   - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
 10. Install either the Mainsail **or** Fluidd web interface
   - If using a Webcam, press `y` if it asks you if you want to install 'MJPG-Streamer' (You can also install this package from Kiauh)
