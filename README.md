@@ -210,7 +210,7 @@ In order to make that value permanent you have to:
  - The `END_PRINT` macro is equally important, because it resets the offset value after every print. If you don't add it to your slicer, Klipper will add your offset values after every print. Ex. *print1 offset=0.1, print2, offset=0.2,...* until you restart the printer.
 
 
-Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) where you can find more info about configuring Klipper. The [config reference](https://www.klipper3d.org/Config_Reference.html) section is probably referenced the most.
+Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) where you can find more info about configuring Klipper. These config files are a great starting point and will get you up and printing. However, everyones printer is different and will need to be calibrated and tuned further. Klipper has a lot of really cool features like pressure advance and input shaping. Take the time to read through the documentation; there's so many features that even I'm still learning. The [config reference](https://www.klipper3d.org/Config_Reference.html) section is probably the most reference while tuning.
 
 
 # Troubleshooting
