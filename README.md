@@ -89,7 +89,7 @@ This firmware is the same for all QQ-S Pro printers. The configuration is done
 on the Raspberry Pi.
 
 ### Precompiled Version
-I've included a pre-compiled version of the printer firmware in the **precompiled_firmware** folder.
+I've included a pre-compiled version of the printer firmware in the *precompiled_firmware* folder.
 
 1. Drag this file into the root directory of the SD card of your printer, insert it, and power it on. It is the same process as flashing Marlin or any other firmware on the QQ-S Pro.
 
