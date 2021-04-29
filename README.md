@@ -66,47 +66,64 @@ Hardware you will need:
 
 Software you will need:
 
-1. OctoPi Operating System for Raspberry Pi
+1. MainsailOS Operating System for Raspberry Pi (This OS already comes with all of the software pre-configured below)
 2. Klipper firmware for printer (.bin file)
 3. Klipper client for Raspberry Pi
-4. Web interface (OctoPrint, Mainsail, Fluidd)
-5. Klipper API - Moonraker (if using Mainsail or Fluidd)
+4. Web interface (OctoPrint, Mainsail, fluidd)
+5. Klipper API - Moonraker (if using Mainsail or fluidd)
 6. Kiauh (Klipper Insallation and Update Helper) - will be used to install all the required software on the Raspberry Pi
 
 
 ## Step 1 - Setting up the Raspberry Pi
 
 The heart of Klipper is the Raspberry Pi, which will be running both the firmware and the web interface through which we control the printer.
-These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion.
+These are the steps to set up the Pi. This guide is going to go over how to configure the Mainsail or fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and fluidd were developed for Klipper (fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion.
 
-However, if you are hellbent on using OctoPrint or need to use its massive plugin library, you only need to follow **Step 1** and **Step 2**, then skip ahead to the next section. You will need to download the OctoKlipper plugin to get it working but I'm not going to cover the OctoPrint setup since it's already covered in the original Klipper [installation page](https://www.klipper3d.org/Installation.html):
+However, if you are hellbent on using OctoPrint or need to use its massive plugin library, you need to download [OctoPi](https://octoprint.org/download/) and install the OctoKlipper plugin to get it working but I'm not going to cover the OctoPrint setup since it's already covered in the original Klipper [installation page](https://www.klipper3d.org/Installation.html). **Step 2** and **Step 4** are still relevant though.
 
-1. Download the [OctoPi](https://octoprint.org/download/) operating system and set it up on the Raspberry Pi according to the instructions on the download page.
-2. Once the Raspberry Pi is configured, open up `https://octopi.local` on your browser to see if the web server is set up. You should see the OctoPrint UI if successful.
-3. ssh into it from your computer: `ssh pi@octopi.local`
-4. Delete all the folders in the root directory `sudo rm -r *` - this is so that OctoPrint doesn't interfere with our web interface installation. You can always install it again with Kiauh
-5. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
-6. Navigate to the Kiauh directory: `cd kiauh`
-7. Run Kiauh: `./kiauh.sh`
-8. Install Klipper Firmware
-  - set Klipper to use the default config directory: press `Enter` then `y`
-  - create only 1 instance of Klipper because we're not going to be running multiple printers
-9. Install the the Klipper API - Moonraker
-  - if the prompt asks you if you want to disable OctoPrint, press `y`
-  - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
-10. Install either the Mainsail **or** Fluidd web interface
-  - If using a Webcam, press `y` if it asks you if you want to install 'MJPG-Streamer' (You can also install this package from Kiauh)
-  - Press `y` again if it asks you if you want to add the recommended macros
-  - Note that after you install both Klipper and the Moonraker API, you can use Kiauh to switch between the two web interfaces to try them out. Just remove one and install the other (you don't need to re-install Klipper or Moonraker)
-11. Edit visudo to allow either Mainsail or Fluidd to update the system:
-  - Enter: `sudo visudo` in the Raspberry Pi terminal
-  - Then copy and paste this line to the end of the file: `pi ALL=(ALL) NOPASSWD: ALL` (if you change your username, you will have to replace 'pi' with your new username)
-  - Press `Control + X` to exit, then `y` when it asks you if you want to save your changes
-12. Navigate to the default hostname 'http://octopi.local' in your browser. *I will assume you're using the default hostname for the duration of this guide.*
+1. Download the latest release of the [MainsailOS](https://github.com/raymondh2/MainsailOS/releases)
+     - unzip the .img file from your download
+     - insert an 8GB or larger SD card into your computer and **do not format it**, if you do, the flashing process might fail
+     - use [BalenaEtcher](https://www.balena.io/etcher/) to write the .img to an 8GB or larger SD card. **This will overwrite all the data on your card** (eject and remove the SD card when done)
+     - if you are **not** going to be using WiFi, insert the SD card into the Pi, hook it up to an ethernet cable, turn it on, and continue to step 2  
+     - if you **are** going to be using WiFi, plug the SD card back into your computer, open it in a folder, and find the file named `mainsailos-wpa-supplicant.txt`
+     - open the file with a **plain text editor** like [SublimeText](https://www.sublimetext.com/3), other text editors such as TextEdit(Mac) or Notepad(Windows) have been known to mess the configuration up.
+     - Find this block of code:
+     ```
+     ## WPA/WPA2 secured
+     #network={
+     #  ssid="put SSID here"
+     #  psk="put password here"
+     #}
+    ```      
+     - Uncomment the last **4** lines by deleting the `#` in front of them
+        - replace `put SSID here` with the name of your WiFi network (don't delete the double quotes)
+        - replace `put password here` with the password of your WiFi network (also don't delete the double quotes)
 
-#### You should see your selected web interface displayed on the page.
+ - Save the file to the SD card, eject it, and insert it into the Pi   
 
-If you see either the Mainsail or Fluidd interface, you can end your ssh session with the Pi by typing `exit`
+- Default username: pi
+- Default password: password
+
+
+2. Boot up the Pi and wait a few seconds and open up `https://mainsailos.local`.
+    - **You should see the Mainsail interface on your browser**
+    - If you don't, your Pi is probably not connected to the Wifi Network. You either:
+      - entered your network information wrong
+      - Have a RaspberryPi 3+ and above and are using the onboard WiFi, in which case you need to open up `mainsailos-wpa-supplicant.txt` and uncomment your country for it to work     
+3. ssh into it from your computer: `ssh pi@mainsailos.local`
+4. Navigate into the klipper_config foler `cd klipper_config`
+5. Create a printer configuration file: `touch printer.cfg`
+6. (optional) If you want to use fluidd instead of Mainsail navigate to the kiauh directory: `cd ../kiauh`
+7. (optional) Run kiauh: `./kiauh.sh`
+8. (optional) Remove Mainsail
+9. (optional) Install fluidd - no need to install macros since the preconfigured files already have them
+10. (optional) Quit Kiauh   
+6. Exit your ssh session: `exit`
+
+
+#### Refresh the web-page if you installed fluidd and you should see the new interface
+
 
 
 ## Step 2 - Installing the firmware on the printer
@@ -122,7 +139,7 @@ I've included a pre-compiled version of the printer firmware in the *precompiled
 ### Uncompiled Version
 If you'd rather compile it yourself or my precompiled version is not working for some reason, this is what you need to do:
 
-1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
+1. ssh into your Raspberry Pi: `ssh pi@mainsailos.local`
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
 - Enable extra low-level configuration options
@@ -143,7 +160,7 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
 8. Navigate to the *out* directory and verify that the file 'robin_mini.bin' exists: `cd ../out` then `ls`
 9. Disconnect from your Pi: `exit`
-10. Download the 'robin_mini.bin' file from the Raspberry Pi to your computer using sftp: `sftp pi@octopi.local` then `cd klipper/out` then `get robin_mini.bin`
+10. Download the 'robin_mini.bin' file from the Raspberry Pi to your computer using sftp: `sftp pi@mainsailos.local` then `cd klipper/out` then `get robin_mini.bin`
 
   - this will download 'robin_mini.bin' to whichever directory you've issued the sftp command from
 
@@ -153,17 +170,17 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
 ## Step 3 -  Connecting the Printer to the Raspberry Pi
 
-1. Open the web interface `http://octopi.local` in your browser
+1. Open the web interface `http://mainsailos.local` in your browser
 
 2. Plug in the printer to one of your Raspberry Pi's USB ports
 
-3. ssh into your Raspberry Pi: `ssh pi@octopi.local`
+3. ssh into your Raspberry Pi: `ssh pi@mainsailos.local`
 
 4. Find out which serial port your printer is connected to: `ls /dev/serial/by-id/*` and copy the output
 
 5. Open up the printer.cfg file on your browser:
   - **Mainsail**: in the *Settings/Machine* tab on the bottom left
-  - **Fluidd**: in the *Configure* tab on the top right
+  - **fluidd**: in the *Configure* tab on the top right
 
 
 6. Once in the printer.cfg file, delete everything and copy the contents of the desired config file from the *configuration* folder of this repository
@@ -226,7 +243,7 @@ If you'd rather compile it yourself or my precompiled version is not working for
 3. Load some gcode and start a print
 
 
-4. Both *Mainsail* and *Fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this offset value (which is shown on screen) is reset after every print.
+4. Both *Mainsail* and *fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this offset value (which is shown on screen) is reset after every print.
 In order to make that value permanent you have to:
 
  - go back to `[gcode_macro START_PRINT]` and comment out the line:   `SET_GCODE_OFFSET Z_ADJUST=-0.1 MOVE=1` by removing the **#** in front of it.
