@@ -220,9 +220,9 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 
     * Either your printer is not calibrated properly or your probe is not accurate enough
 
-    * Try running `PROBE_ACCURACY` with your Z-probe attached and if you get a value greater than 0.025 mm, your probe is not accurate enough to use mesh leveling and you have to delete your mesh profile in the web interface.
+    * Try running `PROBE_ACCURACY` with your Z-probe attached and if you get a value **greater than** 0.025 mm, your probe is not accurate enough to use mesh leveling and you have to delete your mesh profile in the web interface.
 
-    * If You get a value less than 0.25, then you need to run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html)
+    * If You get a value **less than** 0.025 mm, then you need to run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html)
 
 
 2. Why is my extruder temperature reading way off?
