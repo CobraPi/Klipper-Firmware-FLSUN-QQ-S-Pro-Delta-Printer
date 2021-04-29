@@ -5,31 +5,44 @@ The advantage of this is that the complex inverse kinematic calculations of delt
 Raspberry Pi, which has way more computational horsepower compared to the 32-bit microcontroller in the printer.
 This way, all the microcontroller has to handle are the movement commands (ex. move stepper_a 10 steps) as well as heating commands (ex. heat extruder to 200 degrees). This results in a much smoother operation of the printer.
 
-Another advantage of Klipper is that you don't have to recompile and flash the firmware every time you change something in
-the configuration file, such as Marlin. You can even edit the configuration file on the web interface and hit a button to reset the printer and instantly load the new configuration. This makes the tuning process much more efficient.
+Another advantage of Klipper is that you don't have to recompile and flash the printer firmware every time you change something in
+the configuration file like you do in Marlin. You can even edit the configuration file on the web interface and hit a button to reset the printer and instantly load the new configuration. This makes the tuning process much more efficient.
+
+It's also highly configurable. Here are some of the cool things you can do with it:
+
+- You can set it up to run multiple boards on a single printer (if you have a ton of steppers and/or extruders)
+- You can run multiple printers from one Raspberry Pi and control them all from a single web interface
+- You can set up a printer farm by running a ton of printers on a powerful Linux PC
 
 ### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently.
 
 # Klipper Firmware for FLSUN QQ-S Pro
-This repository contains firmware configuration files and instructions on how to get the [Klipper](https://www.klipper3d.org/) firmware running on the FLSUN QQ-S Pro delta 3D printer.
+This repository contains everything you need to get [Klipper](https://www.klipper3d.org/) up and running on the FLSUN QQ-S Pro delta 3D printer.
 
 The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
-## How to Connect an End-stop Switch Style Filament Sensor
-Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer(filament_sensor).cfg file.
+## How to Connect an [End-stop Switch Style Filament Sensor](https://www.amazon.com/dp/B07SFFXC9C/ref=cm_sw_em_r_mt_dp_Z5ZS3Q0HWGKHF008EVH4)
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer_qqs(Filament Sensor).cfg file.
+
+Note that this is a highly recommended upgrade because the stock FLSUN Highspeed board has an empty slot available for it. You also don't have the problem where you have to connect it to the Raspberry Pi when running the printer from a web interface, like you do in Marlin. It's a simple upgrade, just plug it in and you're good to go. No soldering or removing of components required.
 
 ## How to Connect a BL Touch
 Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link.
 
-1. Remove the WiFi Module
-2. Switch the jumper pin from 3.3V to 5V (located near the top right of the WiFi module - from perspective of picture)
-3. Connect:
+1. Print [this](https://www.thingiverse.com/thing:4700577) hotend mount with the BL Touch attachment and install it in the printer.
+2. Remove the WiFi Module
+3. Switch the jumper pin from 3.3V to 5V (located near the top right of the WiFi module - from perspective of picture)
+4. Connect:
    - Orange wire -> IO0-PA8
    - Brown wire -> GND
    - Red wire -> 3.3V
    - White wire -> Z- (PA11)
    - Black wire -> Z- (GND)
-4. Use the corresponding printer(BL_touch).cfg file
+5. Use the corresponding printer_qqs(BL_touch).cfg file
+
+Note that it is usually not recommended to use an offset probe like the BL Touch on a delta printer due to effector tilt. However, this can be compensated for by running Klipper's [enhanced delta calibration](https://www.klipper3d.org/Delta_Calibrate.html) routine. It's a very involved process, but if you're installing a BL Touch, I'm sure that's not a problem for you.
+
+I've only included this here because I was able to get it to work just as well as the stock probe, but the only advantage that it has is that you don't have to remove the probe everytime you either auto-level the bed or run a calibration routine.
 
 
 # How to Install the Klipper Ecosystem
@@ -42,6 +55,8 @@ There are 4 different types of configurations for the QQ-S Pro in the *configura
 3. QQ-S Pro with BL Touch
 4. QQ-S Pro with BL Touch and Filament Sensor
 
+They are all the same, with some sections commented out according to your desired configuration. I've inlcuded four of them so that you can just simply copy and paste it without having to comment sections out, which can lead to errors if done incorrectly.
+
 Hardware you will need:
 
 1. Raspberry Pi w/ SD Card
@@ -51,35 +66,64 @@ Hardware you will need:
 
 Software you will need:
 
-1. Raspbian lite OS
-1. Klipper firmware for printer (.bin file)
-2. Klipper client for Raspberry Pi
-3. Web interface (OctoPrint, Mainsail, Fluidd)
-4. Moonraker API (if using Mainsail or Fluidd)
-5. Kiauh Klipper installation and update tool (this tool will allow you to install, update, and remove all the software you will need)
+1. MainsailOS Operating System for Raspberry Pi (This OS already comes with all of the software pre-configured below)
+2. Klipper firmware for printer (.bin file)
+3. Klipper client for Raspberry Pi
+4. Web interface (OctoPrint, Mainsail, fluidd)
+5. Klipper API - Moonraker (if using Mainsail or fluidd)
+6. Kiauh (Klipper Insallation and Update Helper) - will be used to install all the required software on the Raspberry Pi
 
 
 ## Step 1 - Setting up the Raspberry Pi
 
 The heart of Klipper is the Raspberry Pi, which will be running both the firmware and the web interface through which we control the printer.
-These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion. However, if you are hellbent on using OctoPrint or need to use its massive plugin library, follow **Step 1** then skip ahead to **Step 12**. You will need to download the OctoKlipper plugin to get it working but I'm not going to cover the OctoPrint setup since it's already covered in the original Klipper [installation page](https://www.klipper3d.org/Installation.html):
+These are the steps to set up the Pi. This guide is going to go over how to configure the Mainsail or fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and fluidd were developed for Klipper (fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion.
 
-1. Download the [OctoPi](https://octoprint.org/download/) operating system and set it up on the Raspberry Pi according to the instructions on the download page.
-2. Once the Raspberry Pi is configured, open up `https://octopi.local` on your browser to see if the web server is set up. You should see the OctoPrint UI if successful.
-3. ssh into it from your computer: `ssh pi@octopi.local`
-4. Delete all the folders in the root directory `sudo rm -r *` - this is so that OctoPrint doesn't interfere with our web-interface installation. You can always install it again with Kiauh
-5. Clone the Kiauh repository into the root directory of the Pi: `git clone https://github.com/th33xitus/kiauh.git`
-6. Navigate to the Kiauh directory: `cd kiauh`
-7. Run Kiauh: `./kiauh.sh`
-8. Install Klipper Firmware
-  - create only 1 instance of Klipper because we're not going to be running multiple printers
-9. Install the Moonraker API
-  - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
-10. Install either the Mainsail **or** Fluidd web interface
-11. (optional) Install 'MJPG Streamer' if using a webcam - you might have already installed it during the Mainsail/Fluidd installation though. Kiauh will tell you if it's installed in either case
-12. Navigate to the default hostname 'http://octopi.local' in your browser. *I will assume you're using the default hostname for the duration of this guide.*
+However, if you are hellbent on using OctoPrint or need to use its massive plugin library, you need to download [OctoPi](https://octoprint.org/download/) and install the OctoKlipper plugin to get it working but I'm not going to cover the OctoPrint setup since it's already covered in the original Klipper [installation page](https://www.klipper3d.org/Installation.html). **Step 2** and **Step 4** are still relevant though.
 
-#### You should see your selected web interface displayed on the page.
+1. Download the latest release of the [MainsailOS](https://github.com/raymondh2/MainsailOS/releases)
+     - unzip the .img file from your download
+     - insert an 8GB or larger SD card into your computer and **do not format it**, if you do, the flashing process might fail
+     - use [BalenaEtcher](https://www.balena.io/etcher/) to write the .img to an 8GB or larger SD card. **This will overwrite all the data on your card** (eject and remove the SD card when done)
+     - if you are **not** going to be using WiFi, insert the SD card into the Pi, hook it up to an ethernet cable, turn it on, and continue to step 2  
+     - if you **are** going to be using WiFi, plug the SD card back into your computer, open it in a folder, and find the file named `mainsailos-wpa-supplicant.txt`
+     - open the file with a **plain text editor** like [SublimeText](https://www.sublimetext.com/3), other text editors such as TextEdit(Mac) or Notepad(Windows) have been known to mess the configuration up.
+     - Find this block of code:
+     ```
+     ## WPA/WPA2 secured
+     #network={
+     #  ssid="put SSID here"
+     #  psk="put password here"
+     #}
+    ```      
+     - Uncomment the last **4** lines by deleting the `#` in front of them
+        - replace `put SSID here` with the name of your WiFi network (don't delete the double quotes)
+        - replace `put password here` with the password of your WiFi network (also don't delete the double quotes)
+
+ - Save the file to the SD card, eject it, and insert it into the Pi   
+
+- Default username: pi
+- Default password: password
+
+
+2. Boot up the Pi and wait a few seconds and open up `https://mainsailos.local`.
+    - **You should see the Mainsail interface on your browser**
+    - If you don't, your Pi is probably not connected to the Wifi Network. You either:
+      - entered your network information wrong
+      - Have a RaspberryPi 3+ and above and are using the onboard WiFi, in which case you need to open up `mainsailos-wpa-supplicant.txt` and uncomment your country for it to work     
+3. ssh into it from your computer: `ssh pi@mainsailos.local`
+4. Navigate into the klipper_config foler `cd klipper_config`
+5. Create a printer configuration file: `touch printer.cfg`
+6. (optional) If you want to use fluidd instead of Mainsail navigate to the kiauh directory: `cd ../kiauh`
+7. (optional) Run kiauh: `./kiauh.sh`
+8. (optional) Remove Mainsail
+9. (optional) Install fluidd - no need to install macros since the preconfigured files already have them
+10. (optional) Quit Kiauh   
+11. Exit your ssh session: `exit`
+
+
+#### Refresh the web-page if you installed fluidd and you should see the new interface
+
 
 
 ## Step 2 - Installing the firmware on the printer
@@ -88,14 +132,14 @@ This firmware is the same for all QQ-S Pro printers. The configuration is done
 on the Raspberry Pi.
 
 ### Precompiled Version
-I've included a pre-compiled version of the printer firmware in the *precompiled_firmware* folder.
+I've included a pre-compiled version of the printer firmware in the *precompiled_firmware* folder that should work for all QQ-S Pro printers.
 
 1. Drag this file into the root directory of the SD card of your printer, insert it, and power it on. It is the same process as flashing Marlin or any other firmware on the QQ-S Pro.
 
 ### Uncompiled Version
 If you'd rather compile it yourself or my precompiled version is not working for some reason, this is what you need to do:
 
-1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
+1. ssh into your Raspberry Pi: `ssh pi@mainsailos.local`
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
 - Enable extra low-level configuration options
@@ -116,7 +160,7 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
 8. Navigate to the *out* directory and verify that the file 'robin_mini.bin' exists: `cd ../out` then `ls`
 9. Disconnect from your Pi: `exit`
-10. Download the 'robin_mini.bin' file from the Raspberry Pi to your computer using sftp: `sftp pi@octopi.local` then `cd klipper/out` then `get robin_mini.bin`
+10. Download the 'robin_mini.bin' file from the Raspberry Pi to your computer using sftp: `sftp pi@mainsailos.local` then `cd klipper/out` then `get robin_mini.bin`
 
   - this will download 'robin_mini.bin' to whichever directory you've issued the sftp command from
 
@@ -126,17 +170,17 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
 ## Step 3 -  Connecting the Printer to the Raspberry Pi
 
-1. Open the web interface `http://octopi.local` in your browser
+1. Open the web interface `http://mainsailos.local` in your browser
 
 2. Plug in the printer to one of your Raspberry Pi's USB ports
 
-3. ssh into your Raspberry Pi: `ssh pi@octopi.local`
+3. ssh into your Raspberry Pi: `ssh pi@mainsailos.local`
 
 4. Find out which serial port your printer is connected to: `ls /dev/serial/by-id/*` and copy the output
 
 5. Open up the printer.cfg file on your browser:
-  - **Mainsail**: in the *settings/machine* tab on the bottom left
-  - **Fluidd**: in the *printer* tab on the top right
+  - **Mainsail**: in the *Settings/Machine* tab on the bottom left
+  - **fluidd**: in the *Configure* tab on the top right
 
 
 6. Once in the printer.cfg file, delete everything and copy the contents of the desired config file from the *configuration* folder of this repository
@@ -199,7 +243,7 @@ If you'd rather compile it yourself or my precompiled version is not working for
 3. Load some gcode and start a print
 
 
-4. Both *Mainsail* and *Fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this offset value (which is shown on screen) is reset after every print.
+4. Both *Mainsail* and *fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this offset value (which is shown on screen) is reset after every print.
 In order to make that value permanent you have to:
 
  - go back to `[gcode_macro START_PRINT]` and comment out the line:   `SET_GCODE_OFFSET Z_ADJUST=-0.1 MOVE=1` by removing the **#** in front of it.
@@ -211,7 +255,7 @@ In order to make that value permanent you have to:
 
 # Documentation and Further Tuning
 
-Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) where you can find more info about configuring Klipper. These config files are a great starting point and will get you up and printing. However, everyones printer is slightly different and will need to be calibrated and tuned further. Klipper has a lot of really cool features like pressure advance and input shaping. Take the time to read through the documentation and understand Klippers features; there's so many that even I'm still learning. The [config reference](https://www.klipper3d.org/Config_Reference.html) section is probably the most reference while tuning.
+Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) where you can find more info about configuring Klipper. These config files are a great starting point and will get you up and printing. However, everyones printer is slightly different and will need to be calibrated and tuned further. Klipper has a lot of really cool features like pressure advance and input shaping. Take the time to read through the documentation and understand Klippers features; there's so many that even I'm still learning. The [config reference](https://www.klipper3d.org/Config_Reference.html) section is probably the most useful reference while tuning.
 
 
 # Troubleshooting
