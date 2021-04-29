@@ -77,7 +77,7 @@ These are the steps to set up the Pi. I suggest either using the Mainsail or Flu
 9. Install the Moonraker API
   - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
 10. Install either the Mainsail **or** Fluidd web interface
-11. (optional) Install 'MJPG Streamer' if using a webcam
+11. (optional) Install 'MJPG Streamer' if using a webcam - you might have already installed it during the Mainsail/Fluidd installation though. Kiauh will tell you if it's installed in either case 
 12. Reboot the Raspberry Pi `sudo reboot`
 13. Once the Pi reboots, Navigate to your selected hostname (default is 'http://octopi.local') in your browser. *I will assume you're using the default hostname for the duration of this guide.*
 
