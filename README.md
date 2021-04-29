@@ -160,8 +160,8 @@ If you'd rather compile it yourself or my precompiled version is not working for
 4. Find out which serial port your printer is connected to: `ls /dev/serial/by-id/*` and copy the output
 
 5. Open up the printer.cfg file on your browser:
-  - **Mainsail**: in the *settings/machine* tab on the bottom left
-  - **Fluidd**: in the *printer* tab on the top right
+  - **Mainsail**: in the *Settings/Machine* tab on the bottom left
+  - **Fluidd**: in the *Configure* tab on the top right
 
 
 6. Once in the printer.cfg file, delete everything and copy the contents of the desired config file from the *configuration* folder of this repository
