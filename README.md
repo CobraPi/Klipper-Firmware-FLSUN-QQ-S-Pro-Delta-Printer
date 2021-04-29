@@ -94,6 +94,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
   - if the prompt asks you to remove disruptive/incompatible services, select: `1) Remove packages (recommended)`, then enter `y` when it asks you if you want to create 1 Moonraker instance
 10. Install either the Mainsail **or** Fluidd web interface
   - If using a Webcam, press `y` if it asks you if you want to install 'MJPG-Streamer' (You can also install this package from Kiauh)
+  - Press `y` again if it asks you if you want to add the recommended macros
   - Note that after you install both Klipper and the Moonraker API, you can use Kiauh to switch between the two web interfaces to try them out. Just remove one and install the other (you don't need to re-install Klipper or Moonraker)
 11. Edit visudo to allow either Mainsail or Fluidd to update the system:
   - Enter: `sudo visudo` in the Raspberry Pi terminal
