@@ -119,7 +119,7 @@ I've included a pre-compiled version of the printer firmware in the *precompiled
 ### Uncompiled Version
 If you'd rather compile it yourself or my precompiled version is not working for some reason, this is what you need to do:
 
-1. ssh into your Raspberry Pi: `ssh pi@octopi.local` if you've logged out since the last step.
+1. ssh into your Raspberry Pi: `ssh pi@octopi.local`
 2. Navigate to the klipper directory: `cd klipper`
 3. Type: `make menuconfig` and select these settings:
 - Enable extra low-level configuration options
