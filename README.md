@@ -8,6 +8,12 @@ This way, all the microcontroller has to handle are the movement commands (ex. m
 Another advantage of Klipper is that you don't have to recompile and flash the printer firmware every time you change something in
 the configuration file like you do in Marlin. You can even edit the configuration file on the web interface and hit a button to reset the printer and instantly load the new configuration. This makes the tuning process much more efficient.
 
+It's also highly configurable. Here are some of the cool things you can do with it:
+
+- You can set it up to run multiple boards on a single printer (if you have a ton of steppers and/or extruders)
+- You can run multiple printers from one Raspberry Pi and control them all from a single web interface
+- You can set up a printer farm by running a ton of printers on a powerful Linux PC 
+
 ### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently.
 
 # Klipper Firmware for FLSUN QQ-S Pro
@@ -16,7 +22,7 @@ This repository contains everything you need to get [Klipper](https://www.klippe
 The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
 ## How to Connect an [End-stop Switch Style Filament Sensor](https://www.amazon.com/dp/B07SFFXC9C/ref=cm_sw_em_r_mt_dp_Z5ZS3Q0HWGKHF008EVH4)
-Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer_qqs(Filament Sensor).cfg file. 
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer_qqs(Filament Sensor).cfg file.
 
 Note that this is a highly recommended upgrade because the stock FLSUN Highspeed board has an empty slot available for it. You also don't have the problem where you have to connect it to the Raspberry Pi when running the printer from a web interface, like you do in Marlin. It's a simple upgrade, just plug it in and you're good to go. No soldering or removing of components required.
 
@@ -34,7 +40,7 @@ Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/har
    - Black wire -> Z- (GND)
 5. Use the corresponding printer_qqs(BL_touch).cfg file
 
-Note that it is usually not recommended to use an offset probe like the BL Touch on a delta printer due to effector tilt. However, this can be compensated for by running Klipper's [enhanced delta calibration](https://www.klipper3d.org/Delta_Calibrate.html) routine. It's a very involved process, but if you're installing a BL Touch, I'm sure that's not a problem for you. 
+Note that it is usually not recommended to use an offset probe like the BL Touch on a delta printer due to effector tilt. However, this can be compensated for by running Klipper's [enhanced delta calibration](https://www.klipper3d.org/Delta_Calibrate.html) routine. It's a very involved process, but if you're installing a BL Touch, I'm sure that's not a problem for you.
 
 I've only included this here because I was able to get it to work just as well as the stock probe, but the only advantage that it has is that you don't have to remove the probe everytime you either auto-level the bed or run a calibration routine.
 
@@ -49,7 +55,7 @@ There are 4 different types of configurations for the QQ-S Pro in the *configura
 3. QQ-S Pro with BL Touch
 4. QQ-S Pro with BL Touch and Filament Sensor
 
-They are all the same, with some sections commented out according to your desired configuration. I've inlcuded four of them so that you can just simply copy and paste it without having to comment sections out, which can lead to errors if done incorrectly. 
+They are all the same, with some sections commented out according to your desired configuration. I've inlcuded four of them so that you can just simply copy and paste it without having to comment sections out, which can lead to errors if done incorrectly.
 
 Hardware you will need:
 
@@ -71,7 +77,7 @@ Software you will need:
 ## Step 1 - Setting up the Raspberry Pi
 
 The heart of Klipper is the Raspberry Pi, which will be running both the firmware and the web interface through which we control the printer.
-These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion. 
+These are the steps to set up the Pi. I suggest either using the Mainsail or Fluidd web interface as OctoPrint isn't as optimized for Klipper. Although it works just fine with the OctoKlipper plugin, both Mainsail and Fluidd were developed for Klipper (Fluidd is a fork of Mainsail so they're pretty similar). They both have a better interface in my opinion.
 
 However, if you are hellbent on using OctoPrint or need to use its massive plugin library, you only need to follow **Step 1** and **Step 2**, then skip ahead to the next section. You will need to download the OctoKlipper plugin to get it working but I'm not going to cover the OctoPrint setup since it's already covered in the original Klipper [installation page](https://www.klipper3d.org/Installation.html):
 
