@@ -219,7 +219,7 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 
     * Either your printer is not calibrated properly or your probe is not accurate enough
 
-    * Try running `PROBE_ACCURACY` with your Z-probe attached and if you get a value greater than 0.25 mm, your probe is not accurate enough to use mesh leveling and you have to delete your mesh profile in the web interface.
+    * Try running `PROBE_ACCURACY` with your Z-probe attached and if you get a value greater than 0.025 mm, your probe is not accurate enough to use mesh leveling and you have to delete your mesh profile in the web interface.
 
     * If You get a value less than 0.25, then you need to run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html)
 
@@ -233,6 +233,11 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 
     * This was my mistake! I forgot to invert the logic of the probe pin. To fix it you can either:
 
-        * Navigate to the `[probe]` section of the config file and change `pin: PA11` to `pin: !PA11`
+        * Navigate to the `[probe]` section of the config file and change `pin: PA11` to `pin: !PA11`.
 
-        * Do a `git pull` of this repository and replace your old config files with the updated ones
+        * Do a `git pull` of this repository and replace your old config files with the updated ones.
+
+
+4. Why is my printer timing out when I home it?
+
+      * It's probably caused by the `[idle_timeout]` and `timeout: 360` lines in the config. Try commenting them out. I've made this change in the config files as well  
