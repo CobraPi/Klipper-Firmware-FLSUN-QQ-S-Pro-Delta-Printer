@@ -16,7 +16,7 @@ It's also highly configurable. Here are some of the cool things you can do with 
 
 ### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently.
 
-# Klipper Firmware for the FLSUN QQ-S Pro
+# Klipper Firmware for the FLSUN QQ-S Pro Delta Printer
 Due to the lack of information about how to configure Klipper for this particular printer, I have decided to create this repository that contains everything you need to get Klipper up and running on the FLSUN QQ-S Pro delta 3D printer as well as an in-depth tutorial.
 
 The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
