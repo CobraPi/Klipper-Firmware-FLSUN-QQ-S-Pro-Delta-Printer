@@ -1,6 +1,6 @@
 # What is Klipper?
 
-Klipper is a 3D printer firmware that runs on a Raspberry Pi as opposed to the microcontroller of the printer.
+[Klipper](https://www.klipper3d.org/) is a 3D printer firmware that runs on a Raspberry Pi as opposed to the microcontroller of the printer.
 The advantage of this is that the complex inverse kinematic calculations of delta printers can be processed on the
 Raspberry Pi, which has way more computational horsepower compared to the 32-bit microcontroller in the printer.
 This way, all the microcontroller has to handle are the movement commands (ex. move stepper_a 10 steps) as well as heating commands (ex. heat extruder to 200 degrees). This results in a much smoother operation of the printer.
@@ -17,7 +17,7 @@ It's also highly configurable. Here are some of the cool things you can do with 
 ### Use this online README as a reference since the troubleshooting section is constantly updated, or `git pull` frequently.
 
 # Klipper Firmware for FLSUN QQ-S Pro
-This repository contains everything you need to get [Klipper](https://www.klipper3d.org/) up and running on the FLSUN QQ-S Pro delta 3D printer.
+Due to the lack of information about how to configure Klipper for this particular printer, I have decided to create this repository that contains everything you need to get Klipper up and running on the FLSUN QQ-S Pro delta 3D printer as well as an in-depth tutorial.
 
 The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
