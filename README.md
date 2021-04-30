@@ -86,7 +86,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
      - insert an 8GB or larger SD card into your computer and **do not format it**, if you do, the flashing process might fail
      - use [BalenaEtcher](https://www.balena.io/etcher/) to write the .img to an 8GB or larger SD card. **This will overwrite all the data on your card** (eject and remove the SD card when done)
      - if you are **not** going to be using WiFi, insert the SD card into the Pi, hook it up to an ethernet cable, turn it on, and continue to step 2  
-     - if you **are** going to be using WiFi, plug the SD card back into your computer, open it in a folder, and find the file named `mainsailos-wpa-supplicant.txt`
+     - if you **are** going to be using WiFi, plug the SD card back into your computer, open the 'boot' folder, and find the file named `mainsailos-wpa-supplicant.txt`
      - open the file with a **plain text editor** like [SublimeText](https://www.sublimetext.com/3), other text editors such as TextEdit(Mac) or Notepad(Windows) have been known to mess the configuration up.
      - Find this block of code:
      ```
