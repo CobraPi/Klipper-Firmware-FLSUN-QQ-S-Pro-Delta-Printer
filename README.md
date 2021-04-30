@@ -22,12 +22,12 @@ Due to the lack of information about how to configure Klipper for this particula
 The QQ-S Pro uses a board very similar to the MKS Robin Mini, but shares the same pinout as the [MKS Robin Nano V1](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf).
 
 ## How to Connect an [End-stop Switch Style Filament Sensor](https://www.amazon.com/dp/B07SFFXC9C/ref=cm_sw_em_r_mt_dp_Z5ZS3Q0HWGKHF008EVH4)
-Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the printer_qqs(Filament Sensor).cfg file.
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link and connect the filament sensor to 'MT_DET1' and use the `printer_qqs(Filament Sensor).cfg` file.
 
 Note that this is a highly recommended upgrade because the stock FLSUN Highspeed board has an empty slot available for it. You also don't have the problem where you have to connect it to the Raspberry Pi when running the printer from a web interface, like you do in Marlin. It's a simple upgrade, just plug it in and you're good to go. No soldering or removing of components required.
 
 ## How to Connect a BL Touch
-Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link.
+Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/hardware/MKS%20Robin%20Nano%20V1.1_001/MKS%20Robin%20Nano%20V1.1_001%20PIN.pdf) link for the pin reference on the board.
 
 1. Print [this](https://www.thingiverse.com/thing:4700577) hotend mount with the BL Touch attachment and install it in the printer.
 2. Remove the WiFi Module
@@ -38,7 +38,7 @@ Open [this](https://github.com/makerbase-mks/MKS-Robin-Nano-V1.X/blob/master/har
    - Red wire -> 3.3V
    - White wire -> Z- (PA11)
    - Black wire -> Z- (GND)
-5. Use the corresponding printer_qqs(BL_touch).cfg file
+5. Use the corresponding `printer_qqs(BL_touch).cfg` file
 
 Note that it is usually not recommended to use an offset probe like the BL Touch on a delta printer due to effector tilt. However, this can be compensated for by running Klipper's [enhanced delta calibration](https://www.klipper3d.org/Delta_Calibrate.html) routine. It's a very involved process, but if you're installing a BL Touch, I'm sure that's not a problem for you.
 
