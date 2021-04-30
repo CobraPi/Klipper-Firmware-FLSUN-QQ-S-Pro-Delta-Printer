@@ -1,6 +1,6 @@
 # What is Klipper?
 
-[Klipper](https://www.klipper3d.org/) is a 3D printer firmware that runs on a Raspberry Pi as opposed to the microcontroller of the printer.
+[Klipper](https://www.klipper3d.org/) is a 3D printer firmware that runs on a general purpose Linux computer (a Raspberry Pi in this case) as opposed to the microcontroller of the printer.
 The advantage of this is that the complex inverse kinematic calculations of delta printers can be processed on the
 Raspberry Pi, which has way more computational horsepower compared to the 32-bit microcontroller in the printer.
 This way, all the microcontroller has to handle are the movement commands (ex. move stepper_a 10 steps) as well as heating commands (ex. heat extruder to 200 degrees). This results in a much smoother operation of the printer.
