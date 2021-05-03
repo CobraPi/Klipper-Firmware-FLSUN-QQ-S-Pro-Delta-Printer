@@ -286,7 +286,7 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 
 3. Why is my probe not working?
 
-    * This was my mistake! I forgot to invert the logic of the probe pin. To fix it you can either:
+    * This was my mistake! I forgot to invert the logic of the probe pin. I've updtaed the configuration files fix this issue. To fix:
 
         * Navigate to the `[probe]` section of the config file and change `pin: PA11` to `pin: !PA11`.
         
@@ -294,11 +294,12 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 4. Why is my printer timing out when I home it?
 
       * It's probably caused by the `[idle_timeout]` and `timeout: 360` lines in the config. Try commenting them out. I've made this change in the config files as well  
+      * Try switching the USB port the printer is connected to on the Pi 
 
 
 5. Why is my printer going backwards when I home it?
 
-      * This is strange. I don't know exactly what's going on but it can be fixed by adding a `!` in front of each `dir_pin` in the `[stepper]` section.
+      * This is probably due to the use of different stepper drivers, it can be fixed by adding a `!` in front of each `dir_pin` in the `[stepper]` section.
 
       * For example:
       ```
