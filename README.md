@@ -217,7 +217,7 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
 3. When the delta calibration is finished, you need to calculate the Z-offset by typing: `PROBE_CALIBRATE`
 
-  - **After the probe stops**, do the [paper test](https://www.klipper3d.org/Bed_Level.html#the-paper-test) (place a piece of paper under the nozzle)
+  - **After the probe stops, remove it** then do the [paper test](https://www.klipper3d.org/Bed_Level.html#the-paper-test) (place a piece of paper under the nozzle)
 
   - Type: `TESTZ Z=-<value>` to *decrease* Z-height and `TESTZ Z=+<value>` to *increase* it, where `<value>` is the amount in mm by which to decrease or increase the Z-height (usually 0.05 or 0.01 if close to the bed) so that there is just a little friction between the nozzle and paper.
 
@@ -229,12 +229,6 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
    - If using an offset probe (like a BL Touch) you might get an error 'move out of range' because the probe offset causes the print head to move outside the range of the print bed. If this happens, try decreasing the 'mesh_radius' or offsetting the 'mesh_origin' in the config file.
 
-
-5. Remove Z-probe
-
-6. Tune the heater PID settings so that you don't over shoot your desired temperature: `PID_CALIBRATE HEATER=extruder TARGET=<temperature>` where `<temperature>` is the desired temperature to use for tuning.
-
-## Step 5 - Print!
 
 1. Copy `START_PRINT` and paste it in the **start g-code** of your slicer.
 2. Copy `END_PRINT` and paste it in the **end g-code** of your slicer.
