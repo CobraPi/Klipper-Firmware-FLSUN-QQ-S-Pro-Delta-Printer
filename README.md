@@ -203,25 +203,35 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
 ## Step 4 - Calibrating the printer
 
-1. The first thing we need to do is connect the z-probe to the effector (the autolevel switch).
+1. The first thing we need to do is connect the z-probe to the effector (the autolevel switch), attach any print surface material (masking tape, etc.), then heat the bed up to 50 degrees since materials expand with heat.
 
   - If using a BL Touch, follow [this guide](https://www.klipper3d.org/Probe_Calibrate.html) to calculate the X and Y offset of the probe before continuing.
 
 
-2. Then open up the web interface console and type `DELTA_CALIBRATE`. Once this is done type: `SAVE_CONFIG` to save the settings.
-
-  - This will get a decent calibration for your printer, good enough to print well. However if you really want to optimize the calibration
-  for your specific printer, run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html) which requires you to print an
-  object, measure it with digital calipers, and input the values in the console.
-
-
-3. When the delta calibration is finished, you need to calculate the Z-offset by typing: `PROBE_CALIBRATE`
+2. First you need to calculate the 'z_offset' by opening up the web-interface console and typing: `PROBE_CALIBRATE`
 
   - **After the probe stops, remove it** then do the [paper test](https://www.klipper3d.org/Bed_Level.html#the-paper-test) (place a piece of paper under the nozzle)
 
   - Type: `TESTZ Z=-<value>` to *decrease* Z-height and `TESTZ Z=+<value>` to *increase* it, where `<value>` is the amount in mm by which to decrease or increase the Z-height (usually 0.05 or 0.01 if close to the bed) so that there is just a little friction between the nozzle and paper.
 
-  - When you are satisfied with the Z-height, type `ACCEPT` and then `SAVE_CONFIG`
+  - when you are satisfied with the Z-height, type `ACCEPT` and then `SAVE_CONFIG`
+
+  - edit your printer.cfg, any existing 'z_offset' will have been commented out in the `[probe]` section, and a line with the correct value will have been inserted at the bottom of the file
+  
+  - add the correct 'z_offset' value into your `[probe]` section
+  
+  - make sure that `horizontal_move_z` in the `[delta_calibrate]` section, is set to a value **5-10mm higher than the z_offset** we just calculated
+
+  - save the file and restart
+
+  - home the printer and **re-attach the probe**
+
+
+3. Then type `DELTA_CALIBRATE`. Once this is done type: `SAVE_CONFIG` to save the settings.
+
+  - This will get a decent calibration for your printer, good enough to print well. However if you really want to optimize the calibration
+  for your specific printer, run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html) which requires you to print an
+  object, measure it with digital calipers, and input the values in the console.
 
 
 4. Bed mesh leveling is enabled in all the config files, so after setting the Z-offset, type `BED_MESH_CALIBRATE` in the console then `SAVE_CONFIG`
@@ -229,17 +239,21 @@ If you'd rather compile it yourself or my precompiled version is not working for
 
    - If using an offset probe (like a BL Touch) you might get an error 'move out of range' because the probe offset causes the print head to move outside the range of the print bed. If this happens, try decreasing the 'mesh_radius' or offsetting the 'mesh_origin' in the config file.
 
+5. Remove the probe
 
-1. Copy `START_PRINT` and paste it in the **start g-code** of your slicer.
-2. Copy `END_PRINT` and paste it in the **end g-code** of your slicer.
+6. Copy `START_PRINT` and paste it in the **start g-code** of your slicer.
+7. Copy `END_PRINT` and paste it in the **end g-code** of your slicer.
 
   - Both these macros can be found in the config file, so paste any start and end g-code originally found in the slicer underneath the `gcode:` line in both `[gcode_macro START_PRINT]` and `[gcode_macro END_PRINT]`, **so the only thing that should be in your slicer is `START_PRINT` and `END_PRINT`.** This way, if you need to add or delete any gcode commands, they can all be done in the config file without having to reslice the model.
 
 
-3. Load some gcode and start a print
+## Step 5 - Printing
 
 
-4. Both *Mainsail* and *fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this offset value (which is shown on screen) is reset after every print.
+1. Load some gcode and start a print
+
+
+2. Both *Mainsail* and *fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this offset value (which is shown on screen) is reset after every print.
 In order to make that value permanent you have to:
 
  - go back to `[gcode_macro START_PRINT]` and comment out the line:   `SET_GCODE_OFFSET Z_ADJUST=-0.1 MOVE=1` by removing the **#** in front of it.
