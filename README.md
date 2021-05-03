@@ -119,7 +119,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 6. (optional) If you want to use fluidd instead of Mainsail navigate to the kiauh directory: `cd ../kiauh`
 7. (optional) Run kiauh: `./kiauh.sh`
 8. (optional) Remove Mainsail
-9. (optional) Install fluidd - no need to install macros since the preconfigured files already have them
+9. (optional) Install fluidd - make sure to install the macros when it prompts you
 10. (optional) Quit Kiauh   
 11. Exit your ssh session: `exit`
 
