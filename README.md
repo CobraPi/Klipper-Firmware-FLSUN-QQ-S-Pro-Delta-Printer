@@ -253,12 +253,12 @@ If you'd rather compile it yourself or my precompiled version is not working for
 1. Load some gcode and start a print
 
 
-2. Both *Mainsail* and *fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this offset value (which is shown on screen) is reset after every print.
+2. Both *Mainsail* and *fluidd* allow you to adjust the z-offset while printing if the calibration didn't get it quite right. If you do this, this z-offset value (which is shown on screen) is reset after every print.
 In order to make that value permanent you have to:
 
- - go back to `[gcode_macro START_PRINT]` and comment out the line:   `SET_GCODE_OFFSET Z_ADJUST=-0.1 MOVE=1` by removing the **#** in front of it.
+ - go back to `[gcode_macro START_PRINT]` and uncomment the line: `SET_GCODE_OFFSET Z_ADJUST=-0.1 MOVE=1` by removing the **#** in front of it.
 
- - Then replace `-0.1` with the offset value you got during printing. This way, it will load your specific offset every time you start a print.
+ - Then replace `-0.1` with the z-offset value you got during printing. This way, it will load your specific offset every time you start a print.
 
  - The `END_PRINT` macro is equally important, because it resets the offset value after every print. If you don't add it to your slicer, Klipper will add your offset values after every print. Ex. *print1 offset=0.1, print2, offset=0.2,...* until you restart the printer.
 
@@ -277,6 +277,8 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
     * Try running `PROBE_ACCURACY` with your Z-probe attached and if you get a range value **greater than** 0.025 mm, your probe is not accurate enough to use mesh leveling and you have to delete your mesh profile in the web interface.
 
     * If You get a range value **less than** 0.025 mm, then you need to run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html)
+
+    * You can look at [these examples](http://wp.boim.com/?p=67) of bed errors to see if they look like your bed mesh. If so then running the [Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html) should help. **I am not sure if the delta_calibration can be run multible times.**
 
 
 2. Why is my extruder temperature reading way off?
