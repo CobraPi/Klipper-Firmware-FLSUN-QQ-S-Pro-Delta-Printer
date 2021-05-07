@@ -278,7 +278,7 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
 
     * If You get a range value **less than** 0.025 mm, then you need to run the [Enhanced Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html)
 
-    * You can look at [these examples](http://wp.boim.com/?p=67) of bed errors to see if they look like your bed mesh. If so then running the [Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html) should help. **I am not sure if the delta_calibration can be run multible times.**
+    * You can look at [these examples](http://wp.boim.com/?p=67) of bed errors to see if they look like your bed mesh. If so then running the [Delta Calibration](https://www.klipper3d.org/Delta_Calibrate.html) should help.
 
 
 2. Why is my extruder temperature reading way off?
