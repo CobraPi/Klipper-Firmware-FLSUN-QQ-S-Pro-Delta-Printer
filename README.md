@@ -104,8 +104,8 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 
  - Save the file to the SD card, eject it, and insert it into the Pi   
 
-- Default username: pi
-- Default password: password
+- Default username: `pi`
+- Default password: `password` (or `raspberry`) 
 
 
 2. Boot up the Pi and wait a few seconds and open up `https://mainsailos.local`.
