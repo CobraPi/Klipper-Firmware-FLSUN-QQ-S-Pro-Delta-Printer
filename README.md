@@ -1,3 +1,7 @@
+### Taken from the README.md of my GitHub repository: https://github.com/CobraPi/Klipper-Firmware-FLSUN-QQ-S-Pro-Delta-Printer
+
+# Instructions on how to set up the Klipper firmware
+
 # What is Klipper?
 
 [Klipper](https://www.klipper3d.org/) is a 3D printer firmware that runs on a general purpose Linux computer (a Raspberry Pi in this case) as opposed to the microcontroller of the printer.
@@ -217,9 +221,9 @@ If you'd rather compile it yourself or my precompiled version is not working for
   - when you are satisfied with the Z-height, type `ACCEPT` and then `SAVE_CONFIG`
 
   - edit your printer.cfg, any existing 'z_offset' will have been commented out in the `[probe]` section, and a line with the correct value will have been inserted at the bottom of the file
-  
+
   - add the correct 'z_offset' value into your `[probe]` section
-  
+
   - make sure that `horizontal_move_z` in the `[delta_calibrate]` section, is set to a value **5-10mm higher than the z_offset** we just calculated
 
   - save the file and restart
@@ -291,12 +295,12 @@ Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) whe
     * This was my mistake! I forgot to invert the logic of the probe pin. I've updtaed the configuration files fix this issue. To fix:
 
         * Navigate to the `[probe]` section of the config file and change `pin: PA11` to `pin: !PA11`.
-        
+
 
 4. Why is my printer timing out when I home it?
 
       * It's probably caused by the `[idle_timeout]` and `timeout: 360` lines in the config. Try commenting them out. I've made this change in the config files as well  
-      * Try switching the USB port the printer is connected to on the Pi 
+      * Try switching the USB port the printer is connected to on the Pi
 
 
 5. Why is my printer going backwards when I home it?
