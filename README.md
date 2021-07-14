@@ -269,7 +269,7 @@ In order to make that value permanent you have to:
 
 # Documentation and Further Tuning
 
-Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) where you can find more info about configuring Klipper. These config files are a great starting point and will get you up and printing. However, everyones printer is slightly different and will need to be calibrated and tuned further. Klipper has a lot of really cool features like pressure advance and input shaping. Take the time to read through the documentation and understand Klippers features; there's so many that even I'm still learning. The [config reference](https://www.klipper3d.org/Config_Reference.html) section is probably the most useful reference while tuning.
+Here is the Klipper [documentation](https://www.klipper3d.org/Overview.html) where you can find more info about configuring Klipper. These config files are a great starting point and will get you up and printing. However, everyones printer is slightly different and will need to be calibrated and tuned further. Klipper has a lot of really cool features like pressure advance and input shaping. Take the time to read through the documentation and understand Klippers features; there's so many. The [config reference](https://www.klipper3d.org/Config_Reference.html) section is probably the most useful reference while tuning.
 
 
 # Troubleshooting
