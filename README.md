@@ -118,7 +118,7 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
       - entered your network information wrong
       - Have a RaspberryPi 3+ and above and are using the onboard WiFi, in which case you need to open up `mainsailos-wpa-supplicant.txt` and uncomment your country for it to work     
 3. ssh into it from your computer: `ssh pi@mainsailos.local`
-4. Navigate into the klipper_config foler `cd klipper_config`
+4. Navigate into the klipper_config folder `cd klipper_config`
 5. Create a printer configuration file: `touch printer.cfg`
 6. (optional) If you want to use fluidd instead of Mainsail navigate to the kiauh directory: `cd ../kiauh`
 7. (optional) Run kiauh: `./kiauh.sh`
