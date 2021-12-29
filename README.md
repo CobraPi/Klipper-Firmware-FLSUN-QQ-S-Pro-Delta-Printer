@@ -1,5 +1,3 @@
-### Taken from the README.md of my GitHub repository: https://github.com/CobraPi/Klipper-Firmware-FLSUN-QQ-S-Pro-Delta-Printer
-
 # Instructions on how to set up the Klipper firmware
 
 # What is Klipper?
