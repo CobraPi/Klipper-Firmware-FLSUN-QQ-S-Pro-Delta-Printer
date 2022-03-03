@@ -118,12 +118,13 @@ However, if you are hellbent on using OctoPrint or need to use its massive plugi
 3. ssh into it from your computer: `ssh pi@mainsailos.local`
 4. Navigate into the klipper_config folder `cd klipper_config`
 5. Create a printer configuration file: `touch printer.cfg`
-6. (optional) If you want to use fluidd instead of Mainsail navigate to the kiauh directory: `cd ../kiauh`
-7. (optional) Run kiauh: `./kiauh.sh`
-8. (optional) Remove Mainsail
-9. (optional) Install fluidd - make sure to install the macros when it prompts you
-10. (optional) Quit Kiauh   
-11. Exit your ssh session: `exit`
+6. (optional) If you want to use fluidd instead of Mainsail you will need to install kiauh. `git clone https://github.com/th33xitus/kiauh.git`
+7. (optional) Then navigate to the kiauh directory: `cd ../kiauh`
+8. (optional) Run kiauh: `./kiauh.sh`
+9. (optional) Remove Mainsail, it is possible to run both fluidd and Mainsail.
+10. (optional) Install fluidd - make sure to install the macros when it prompts you
+11. (optional) Quit Kiauh   
+12. Exit your ssh session: `exit`
 
 
 #### Refresh the web-page if you installed fluidd and you should see the new interface
